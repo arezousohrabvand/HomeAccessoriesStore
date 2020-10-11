@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<HomeAccessoriesStore.Models.Category>
+<h1>Furniture</h1>
+
+<a asp-controller="Furniture" asp-action="AddCategory" >Add a new Category</a>
+<ul>
+    @foreach(var c in Model)
+    {
+        <li>
+            <a asp-controller="Furniture" asp-action="Details" asp-route-category="@c.Name">@c.Name</a> 
+        </li>
+    }
+</ul>
+
+
