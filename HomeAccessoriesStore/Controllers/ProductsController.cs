@@ -25,6 +25,7 @@ namespace HomeAccessoriesStore.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Product.Include(p => p.Category);
+            //ordering by name
             return View(await applicationDbContext.OrderBy(p =>p.Name).ToListAsync());
         }
 
@@ -57,6 +58,7 @@ namespace HomeAccessoriesStore.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Creating Guid class for uploading photo in create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductId,Name,Discription,Price,Brand,Stock,CategoryId")] Products products, IFormFile Photo)
@@ -100,6 +102,7 @@ namespace HomeAccessoriesStore.Controllers
             {
                 return NotFound();
             }
+            //Ordering the name
             ViewData["CategoryId"] = new SelectList(_context.Category.OrderBy(c =>c.Name), "CategoryId", "Name", products.CategoryId);
             return View(products);
         }
@@ -107,6 +110,7 @@ namespace HomeAccessoriesStore.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Creating Guid class for uploading photo in Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Discription,Price,Brand,Stock,CategoryId")] Products products,IFormFile Photo)
