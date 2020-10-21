@@ -8,9 +8,12 @@ namespace HomeAccessoriesStore.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        
+        public int CategoryId { get; set; }
        
         [Required]
         public string Name { get; set; }
+        public List<Products>Products { get; set; }
+     
     }
 }

@@ -56,7 +56,7 @@ namespace HomeAccessoriesStore
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            _ = app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
