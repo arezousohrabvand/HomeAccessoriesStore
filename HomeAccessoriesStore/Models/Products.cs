@@ -24,6 +24,7 @@ namespace HomeAccessoriesStore.Models
     
         public string Stock { get; set; }
         public Category Category { get; set; }
+        //with Display(Name ="Category) we can have Category in product page instead of Category Id
         [Display(Name ="Category")]
         public int CategoryId { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }

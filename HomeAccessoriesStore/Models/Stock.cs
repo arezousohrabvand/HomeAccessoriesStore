@@ -10,7 +10,8 @@ namespace HomeAccessoriesStore.Models
     {
        
         public int StockId { get; set; }//pk
-    
+        //with Display(Name ="Product) we can have Product  instead of ProductId
+        [Display(Name = "Product")]
         public int ProductId { get; set; }//fk
         public string StockStatus { get; set; }
         public int Quantity { get; set; }

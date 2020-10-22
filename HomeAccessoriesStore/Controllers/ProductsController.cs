@@ -9,6 +9,9 @@ using HomeAccessoriesStore.Data;
 using HomeAccessoriesStore.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Net;
+using Newtonsoft.Json;
+
 
 namespace HomeAccessoriesStore.Controllers
 {
@@ -195,4 +198,6 @@ namespace HomeAccessoriesStore.Controllers
             return _context.Product.Any(e => e.ProductId == id);
         }
     }
+   
 }
+

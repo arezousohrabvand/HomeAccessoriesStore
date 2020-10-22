@@ -9,7 +9,7 @@ namespace HomeAccessoriesStore.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-
+        // Define my model classes here so my controllers can have access to my models
         public DbSet<Cart> Cart { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Orders> Order { get; set; }
@@ -27,7 +27,7 @@ namespace HomeAccessoriesStore.Data
         {
             base.OnModelCreating(builder);
 
-
+            //Define my table relationships and keys
             //Products and Category
             builder.Entity<Products>()
                 .HasOne(p => p.Category)
