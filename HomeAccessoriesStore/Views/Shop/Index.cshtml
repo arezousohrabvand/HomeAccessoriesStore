@@ -1,0 +1,98 @@
+﻿@model IEnumerable<HomeAccessoriesStore.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+
+
+        @@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+
+        h3 {
+            border-right: solid 5px rgba(255,255,255,.75);
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Arial', Helvetica, sans-serif;
+            font-size: 20px;
+            color: black;
+        }
+
+        /* Animation */
+        h3 {
+            animation: animated-text 4s linear 1s 1 normal both, animated-cursor 600ms linear infinite;
+        }
+
+        /* text animation */
+
+        @@keyframes animated-text {
+            from {
+                width: 0px;
+            }
+
+            to {
+                width: 700px;
+            }
+        }
+
+        /* cursor animations */
+
+        @@keyframes animated-cursor {
+            from {
+                border-right-color: transparent;
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+
+    </style>
+</head>
+
+<h3>Choose your Category</h3>
+
+<section class="row card-group">
+    @foreach(var item in Model)
+    {
+        <div class="col-sm-6 col-lg-4 mb-3">
+            <div class="card mb-4 text-center h-100" >
+            <div class="card-body">
+                <a asp-controller="Shop" asp-action="ShopDetails" asp-route-id="@item.CategoryId">@item.Name</a>
+            </div>
+            </div>
+        </div>
+    }
+</section>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@

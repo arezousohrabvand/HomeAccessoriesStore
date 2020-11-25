@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\pics\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\css\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomeAccessoriesStore.Data;
 using HomeAccessoriesStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeAccessoriesStore.Controllers
 {
+    //everything goes private
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +29,7 @@ namespace HomeAccessoriesStore.Controllers
         }
 
         // GET: Categories/Details/5
+       
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

@@ -59,25 +59,29 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  background-image:url(../css/backimg/backimg.jpg);
-  background-repeat:no-repeat;
-  background-size:cover;
-  opacity:0.9;
+    /* Margin bottom by footer height */
+margin-bottom:60px;
+background-image:url(../img/backG/backimg.jpg);
+background-repeat:no-repeat;
+background-size:cover;
+opacity:0.9;
+
 }
 .footer {
     position: absolute;
     bottom: 20px;
     width: 100%;
     white-space: nowrap;
-    background-color:black;
+    background-color: whitesmoke;
     text-decoration: double;
     font-family: Impact,Charcoal,sans-serif;
-    font-size: 80px
-   
+    font-size: 20px
 }
 .img-thumbnail {
   
-    width: 150px;
+    width: 100px;
 }
+.input-small {
+    width:30px;
+}
+

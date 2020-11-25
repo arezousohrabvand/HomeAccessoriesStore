@@ -40,5 +40,6 @@ namespace HomeAccessoriesStore.Models
         public List<Address> Addresses { get; set; }
         public List<PaymentType> PaymentTypes { get; set; }
         public List<User> Users { get; set; }
+        public List<Cart> Cart { get; set; }
     }
 }

@@ -11,10 +11,12 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Net;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeAccessoriesStore.Controllers
 {
+    //make it private
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,6 +32,8 @@ namespace HomeAccessoriesStore.Controllers
             var applicationDbContext = _context.Product.Include(p => p.Category);
             return View(await applicationDbContext.OrderBy(p =>p.Name).ToListAsync());
         }
+        //allow to use everyone
+        [AllowAnonymous]
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -74,6 +74,15 @@ namespace HomeAccessoriesStore.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CustomersCustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -87,6 +96,8 @@ namespace HomeAccessoriesStore.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CartId");
+
+                    b.HasIndex("CustomersCustomerId");
 
                     b.HasIndex("ProductId");
 
@@ -577,6 +588,10 @@ namespace HomeAccessoriesStore.Data.Migrations
 
             modelBuilder.Entity("HomeAccessoriesStore.Models.Cart", b =>
                 {
+                    b.HasOne("HomeAccessoriesStore.Models.Customers", null)
+                        .WithMany("Cart")
+                        .HasForeignKey("CustomersCustomerId");
+
                     b.HasOne("HomeAccessoriesStore.Models.Products", "Products")
                         .WithMany("Cart")
                         .HasForeignKey("ProductId")

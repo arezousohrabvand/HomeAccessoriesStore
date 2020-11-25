@@ -80,7 +80,7 @@ namespace HomeAccessoriesStore.Data
              .HasForeignKey(p => p.ProductId)
              .HasConstraintName("FK_ProductCategories_ProductID");
 
-    
+       
 
             //Address and Customer
             builder.Entity<Address>()

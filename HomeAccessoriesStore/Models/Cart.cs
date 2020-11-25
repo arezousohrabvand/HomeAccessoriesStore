@@ -12,11 +12,14 @@ namespace HomeAccessoriesStore.Models
         public int CartId { get; set; }//pk
         [Required]
         public int ProductId { get; set; }//fk
+        public string CustomerId { get; set; }
         public int Quantity { get; set; }
         public string UserName { get; set; }
         [Column(TypeName ="decimal(18,2)")]
         public Decimal TotalPrice { get; set; }
-        public Products Products { get; set; }
+        public DateTime  Date{ get; set; }
+    public Products Products { get; set; }
+
 
     }
 }

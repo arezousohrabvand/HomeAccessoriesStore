@@ -9,6 +9,8 @@ namespace HomeAccessoriesStore.Models
 {
     public class Products
     {
+        
+
         [Key]
         public int ProductId { get; set; }
         [Required]

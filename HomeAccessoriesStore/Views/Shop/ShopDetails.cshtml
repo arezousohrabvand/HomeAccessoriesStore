@@ -1,0 +1,139 @@
+﻿<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+      
+
+        @@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+
+        h3{
+           
+            border-right: solid 5px rgba(255,255,255,.75);
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Arial', Helvetica, sans-serif;
+            font-size:20px;
+            color: black;
+        }
+
+        /* Animation */
+        h3 {
+            animation: animated-text 4s linear 1s 1 normal both, animated-cursor 600ms linear infinite;
+        }
+
+        /* text animation */
+
+        @@keyframes animated-text {
+            from {
+                width: 0px;
+            }
+
+            to {
+                width: 700px;
+            }
+        }
+
+        /* cursor animations */
+
+        @@keyframes animated-cursor {
+            from {
+                border-right-color: transparent;
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+        h4 {
+            border-right: solid 5px rgba(255,255,255,.75);
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Arial', Helvetica, sans-serif;
+            font-size: 16px;
+            color: black;
+        }
+
+        /* Animation */
+        h4 {
+            animation: animated-text 4s linear 4s 1 normal both, animated-cursor 1200ms linear infinite;
+        }
+
+        /* text animation */
+
+        @@keyframes animated-text {
+            from {
+                width: 0px;
+            }
+
+            to {
+                width: 450px;
+            }
+        }
+
+        /* cursor animations */
+
+        @@keyframes animated-cursor {
+            from {
+                border-right-color: transparent;
+            }
+
+            to {
+                border-right-color: transparent;
+            }
+        }
+    </style>
+</head>
+<h3>Your chosen categoy is:</h3>
+@if (ViewBag.Category != null)
+{
+
+
+    <h4>@ViewBag.category</h4>
+}
+<section class="row card-group">
+    @*choose var p to represent product*@
+    @foreach (var p in Model)
+    {
+        <div class="col-sm-6 col-lg-4 mb-3">
+            <div class="card mb-4 text-center h-100">
+                <div class="card-body">
+                    @* It shows Name on shopping cart *@
+                    <h5><a asp-controller="Products" asp-action="Details" asp-route-id="@p.ProductId">@p.Name</a></h5>
+                    @* It shows Photo on shopping cart *@
+                    <img src="~/img/pics/@p.Photo" onmouseover="bigPic(this)" onmouseout="normalPic(this)" border="0" alt="Product photo" class="img-thumbnail" />
+                    <script>
+                        function bigPic(x) {
+                            x.style.height = "200px";
+                            x.style.width = "200px";
+                        }
+                        function normalPic(x) {
+                            x.style.height = "100px";
+                            x.style.width = "100px";
+                        }
+                    </script>
+                    @* It shows Discription on shopping cart *@
+                    <h6>
+                        @String.Format("{0:c}", p.Price)
+                    </h6>
+                    <p>
+                        @p.Discription
+                    </p>
+
+
+                    @*Form*@
+                    <form method="post" action="/Shop/AddToCart">
+                        @*Hide field for the selected product id*@
+                        <input type="hidden" id="ProductId" name="ProductId" value="@p.ProductId" />
+                        <div class="form-group">
+                            <label class="control-label" for="Quantity">Quantity:</label>
+                            <input name="Quantity" id="Quantity" required min="1" max="99999" type="number" class="input-small" />
+                        </div>
+                        <button class="btn btn-primary">Add To Cart</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    }
+</section>
