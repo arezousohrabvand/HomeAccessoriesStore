@@ -15,7 +15,7 @@ namespace HomeAccessoriesStore.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -120,6 +120,34 @@ namespace HomeAccessoriesStore.Data.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("HomeAccessoriesStore.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("contacts");
+                });
+
             modelBuilder.Entity("HomeAccessoriesStore.Models.Customers", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -172,7 +200,10 @@ namespace HomeAccessoriesStore.Data.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrderId")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrdersId")
                         .HasColumnType("int");
 
                     b.Property<string>("Payment")
@@ -189,7 +220,7 @@ namespace HomeAccessoriesStore.Data.Migrations
 
                     b.HasKey("OrderDetailsId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrdersId");
 
                     b.HasIndex("ProductId");
 
@@ -206,17 +237,35 @@ namespace HomeAccessoriesStore.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("OderDate")
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderStatus")
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrdersId");
 
@@ -604,8 +653,8 @@ namespace HomeAccessoriesStore.Data.Migrations
                 {
                     b.HasOne("HomeAccessoriesStore.Models.Orders", "Orders")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .HasConstraintName("FK_OrderDetail_OrderID")
+                        .HasForeignKey("OrdersId")
+                        .HasConstraintName("FK_OrderDetail_OrdersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -49,8 +49,8 @@ namespace HomeAccessoriesStore.Controllers
         // GET: OrderDetails/Create
         public IActionResult Create()
         {
-            ViewData["OrderId"] = new SelectList(_context.Order, "OrdersId", "OrdersId");
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name");
+            ViewData["OrdersId"] = new SelectList(_context.Order, "OrdersId", "OrdersId");
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Discription");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace HomeAccessoriesStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderDetailsId,ProductId,OrderId,Price,Quantity,Discount,Payment")] OrderDetail orderDetail)
+        public async Task<IActionResult> Create([Bind("OrderDetailsId,ProductId,OrdersId,OrderDate,Price,Quantity,Discount,Payment")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +67,8 @@ namespace HomeAccessoriesStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", orderDetail.ProductId);
+            ViewData["OrdersId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrdersId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Discription", orderDetail.ProductId);
             return View(orderDetail);
         }
 
@@ -85,8 +85,8 @@ namespace HomeAccessoriesStore.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrderId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", orderDetail.ProductId);
+            ViewData["OrdersId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrdersId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Discription", orderDetail.ProductId);
             return View(orderDetail);
         }
 
@@ -95,7 +95,7 @@ namespace HomeAccessoriesStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderDetailsId,ProductId,OrderId,Price,Quantity,Discount,Payment")] OrderDetail orderDetail)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderDetailsId,ProductId,OrdersId,OrderDate,Price,Quantity,Discount,Payment")] OrderDetail orderDetail)
         {
             if (id != orderDetail.OrderDetailsId)
             {
@@ -122,8 +122,8 @@ namespace HomeAccessoriesStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrderId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrderId);
-            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Name", orderDetail.ProductId);
+            ViewData["OrdersId"] = new SelectList(_context.Order, "OrdersId", "OrdersId", orderDetail.OrdersId);
+            ViewData["ProductId"] = new SelectList(_context.Product, "ProductId", "Discription", orderDetail.ProductId);
             return View(orderDetail);
         }
 

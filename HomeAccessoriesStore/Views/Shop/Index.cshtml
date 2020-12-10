@@ -11,7 +11,13 @@
 
         /*use the similar code from code pen*/
         @@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
-
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
 
         h3 {
             border-right: solid 5px rgba(255,255,255,.75);
@@ -55,6 +61,7 @@
 </head>
 
 <h3>Choose your Category</h3>
+
 
 <section class="row card-group">
     @foreach(var item in Model)

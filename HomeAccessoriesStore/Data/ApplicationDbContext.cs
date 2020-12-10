@@ -20,8 +20,10 @@ namespace HomeAccessoriesStore.Data
         public DbSet<Address> Address { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<Customers> Customers { get; set; }
-        public DbSet<ProductCategories>ProductCategories  { get; set; }
+        public DbSet<ProductCategories> ProductCategories { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Contact> Contact { get; set; }
+        public IEnumerable<object> Carts { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,8 +36,8 @@ namespace HomeAccessoriesStore.Data
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
                 .HasConstraintName("FK_Products_CategoryID");
-            
-         
+
+
             //Cart and Products
             builder.Entity<Cart>()
               .HasOne(p => p.Products)
@@ -55,9 +57,9 @@ namespace HomeAccessoriesStore.Data
             builder.Entity<OrderDetail>()
              .HasOne(o => o.Orders)
              .WithMany(o => o.OrderDetails)
-             .HasForeignKey(o => o.OrderId)
-             .HasConstraintName("FK_OrderDetail_OrderID");
-           
+             .HasForeignKey(o => o.OrdersId)
+             .HasConstraintName("FK_OrderDetail_OrdersId");
+
             //OrderDetails and Products
             builder.Entity<OrderDetail>()
                 .HasOne(p => p.Products)
@@ -80,7 +82,7 @@ namespace HomeAccessoriesStore.Data
              .HasForeignKey(p => p.ProductId)
              .HasConstraintName("FK_ProductCategories_ProductID");
 
-       
+
 
             //Address and Customer
             builder.Entity<Address>()

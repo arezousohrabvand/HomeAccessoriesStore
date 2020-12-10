@@ -16,9 +16,8 @@ namespace HomeAccessoriesStore.Models
         [Display(Name = "Product ")]
         public int ProductId { get; set; }//fk
         [Display(Name = " Order ")]
-        public int OrderId { get; set; }//fk
-        [DisplayFormat(DataFormatString = "{0:c}")]
-        [Range(0.01, 99999)]
+        public int OrdersId { get; set; }//fk
+        public DateTime OrderDate { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }
         [DisplayFormat(DataFormatString = "{0:c}")]

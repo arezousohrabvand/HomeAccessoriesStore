@@ -3,66 +3,74 @@
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal total = 0;
 }
 
 
-<h1>Cart</h1>
+<h1>Your Cart</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+<table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Products)
             </th>
+            <th>
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+         
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+         
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CustomerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Products.Discription)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CartId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CartId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CartId">Delete</a>
-                </td>
-            </tr>
+
+            total += (item.Quantity * item.TotalPrice);
+
+        <tr>
+
+            <td>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">@item.Products.Name</a>
+                @*@Html.DisplayFor(modelItem => item.Products.Discription)*@
+            </td>
+            <td>
+                @if (item.Products.Photo != null)
+                {
+                    <img src="@("~/img/pics/"+@item.Products.Photo)" asp-append-version="false" width="200px" height="200px" class="img-thumbnail" />
+
+                }
+            </td>
+            <td class="text-right">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td class="text-right">
+                @String.Format("{0:c}",item.TotalPrice)
+            </td>
+
+            <td>
+                |
+                <a asp-action="RemoveFromCart" asp-route-id="@item.CartId">Delete</a>
+            </td>
+        </tr>
         }
+        <tr>
+            <td colspan="4" class="text-right">
+                @String.Format("{0:c}",total)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Index">Keep Shopping</a>
+                <a class="btn btn-primary" asp-action="CheckOut">Check Out</a>
+            </td>
+        </tr>
     </tbody>
 </table>

@@ -21,7 +21,7 @@
             font-family: fantasy;
         }*/
 
-             @@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+        @@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
 
         p {
@@ -34,34 +34,36 @@
             color: black;
         }
 
-            /* Animation */
-            p {
-              animation: animated-text 4s linear 1s 1 normal both,
-                         animated-cursor 600ms linear infinite;
+        /* Animation */
+        p {
+            animation: animated-text 4s linear 1s 1 normal both, animated-cursor 600ms linear infinite;
+        }
+
+        /* text animation */
+
+        @@keyframes animated-text {
+            from {
+                width: 0px;
             }
 
-            /* text animation */
+            to {
+                width: 1000px;
+            }
+        }
 
-            @@keyframes animated-text{
-              from{width: 0px;}
-              to{width: 1000px;}
+        /* cursor animations */
+
+        @@keyframes animated-cursor {
+            from {
+                border-right-color: transparent;
             }
 
-            /* cursor animations */
-
-            @@keyframes animated-cursor{
-                from {
-                    border-right-color: transparent;
-                }
-              to{border-right-color: transparent;}
+            to {
+                border-right-color: transparent;
             }
-
-
-
-
+        }
     </style>
 </head>
-
 
 <p>Welcome to our store</p>
 

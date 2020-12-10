@@ -30,8 +30,11 @@ namespace HomeAccessoriesStore.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Product.Include(p => p.Category);
-            return View(await applicationDbContext.OrderBy(p =>p.Name).ToListAsync());
+            return View(await applicationDbContext.OrderBy(p => p.Name).ToListAsync());
         }
+
+
+
         //allow to use everyone
         [AllowAnonymous]
 

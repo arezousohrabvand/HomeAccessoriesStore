@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomeAccessoriesStore.Data;
 using HomeAccessoriesStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeAccessoriesStore.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +24,16 @@ namespace HomeAccessoriesStore.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            if (User.IsInRole("Adminstrator"))
+            {
+
+
+                return View(await _context.Order.OrderByDescending(o=>o.OrdersId).ToListAsync());
+            }
+            else
+            {
+                return View(await _context.Order.Where(o=>o.CustomerId==User.Identity.Name).OrderByDescending(o=>o.OrderDate).ToListAsync());
+            }
         }
 
         // GET: Orders/Details/5
@@ -33,8 +44,18 @@ namespace HomeAccessoriesStore.Controllers
                 return NotFound();
             }
 
-            var orders = await _context.Order
+            var orders = await _context.Order.Include(o=>o.OrderDetails).ThenInclude(o=>o.Products)
+
                 .FirstOrDefaultAsync(m => m.OrdersId == id);
+
+
+            if(!User.IsInRole("Adminstrator"))
+            {
+                if(orders.CustomerId !=User.Identity.Name)
+                {
+                    return NotFound();
+                }
+            }
             if (orders == null)
             {
                 return NotFound();
@@ -54,7 +75,7 @@ namespace HomeAccessoriesStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrdersId,CustomerId,ListPrice,Address,EmailAddress,OderDate,OrderStatus")] Orders orders)
+        public async Task<IActionResult> Create([Bind("OrdersId,CustomerId,OrderDate,FirstName,LastName,Address,City,PostalCode,Phone,Province,EmailAddress,total")] Orders orders)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +107,7 @@ namespace HomeAccessoriesStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrdersId,CustomerId,ListPrice,Address,EmailAddress,OderDate,OrderStatus")] Orders orders)
+        public async Task<IActionResult> Edit(int id, [Bind("OrdersId,CustomerId,OrderDate,FirstName,LastName,Address,City,PostalCode,Phone,Province,EmailAddress,total")] Orders orders)
         {
             if (id != orders.OrdersId)
             {
