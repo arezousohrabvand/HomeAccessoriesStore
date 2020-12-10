@@ -255,8 +255,10 @@ namespace HomeAccessoriesStore.Controllers
 
             }
             _context.SaveChanges();
+           
 
-            //HttpContext.Session.SetInt32("ItemCount,0");
+
+            HttpContext.Session.SetInt32("ItemCount", 0);
             return RedirectToAction("Details", "Orders", new { @id = order.OrdersId });
 
         }
