@@ -148,17 +148,16 @@ namespace HomeAccessoriesStore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CheckOut([Bind("FirstName,LastName,Address,City,Province,postalCode")] Models.Orders orders)
         {
+            //Order Properties
             orders.OrderDate = DateTime.Now;
             orders.CustomerId = User.Identity.Name;
-            //var cartCustomer = HttpContext.Session.GetString("CustomerId");
-            //var cartItems = _context.Cart.Where(c => c.CustomerId == cartCustomer);
+           //calculation total in cart
             orders.Total = (from c in _context.Cart
                             where c.CustomerId == HttpContext.Session.GetString("CustomerId")
                             select c.Quantity * c.TotalPrice).Sum();
 
 
-            //var orderTotal = (from c in cartItems select c.Quantity * c.TotalPrice).Sum();
-            //orders.total = orderTotal;
+           
             //use sessionextension obj to store the order obj in asession variable
             HttpContext.Session.SetObject("Orders", orders);
 
@@ -173,7 +172,7 @@ namespace HomeAccessoriesStore.Controllers
         public IActionResult Payment()
         {
             var order = HttpContext.Session.GetObject<Models.Orders>("Orders");
-            ViewBag.total = order.Total;
+            ViewBag.Total = order.Total;
             ViewBag.PublishableKey = _iconfiguration.GetSection("Stripe")["PublishableKey"];
 
             return View();
@@ -213,7 +212,6 @@ namespace HomeAccessoriesStore.Controllers
                   },
                 },
                 Mode = "payment",
-
                 SuccessUrl = "https://" + Request.Host + "/Shop/SaveOrder",
                 CancelUrl = "https://" + Request.Host + "/Shop/Cart"
             };

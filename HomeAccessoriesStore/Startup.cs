@@ -33,9 +33,11 @@ namespace HomeAccessoriesStore
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             //enable session support to store identity for shopping cart
             services.AddSession();
-            //add config support for shopcontroller
+
+            //add config support for shopcontroller(Stripe)
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddControllersWithViews();
             services.AddRazorPages();
