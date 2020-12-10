@@ -152,7 +152,7 @@ namespace HomeAccessoriesStore.Controllers
             orders.CustomerId = User.Identity.Name;
             //var cartCustomer = HttpContext.Session.GetString("CustomerId");
             //var cartItems = _context.Cart.Where(c => c.CustomerId == cartCustomer);
-            orders.total = (from c in _context.Cart
+            orders.Total = (from c in _context.Cart
                             where c.CustomerId == HttpContext.Session.GetString("CustomerId")
                             select c.Quantity * c.TotalPrice).Sum();
 
@@ -173,7 +173,7 @@ namespace HomeAccessoriesStore.Controllers
         public IActionResult Payment()
         {
             var order = HttpContext.Session.GetObject<Models.Orders>("Orders");
-            ViewBag.total = order.total;
+            ViewBag.total = order.Total;
             ViewBag.PublishableKey = _iconfiguration.GetSection("Stripe")["PublishableKey"];
 
             return View();
@@ -202,7 +202,7 @@ namespace HomeAccessoriesStore.Controllers
                   {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                      UnitAmount = (long?)(order.total*100),
+                      UnitAmount = (long?)(order.Total*100),
                       Currency = "cad",
                       ProductData = new SessionLineItemPriceDataProductDataOptions
                       {

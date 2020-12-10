@@ -30,7 +30,7 @@ namespace HomeAccessoriesStore.Models
         [Display(Name = "Email Address ")]
         public string EmailAddress { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal total { get; set; }
+        public decimal Total { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
 
     }
