@@ -2,22 +2,22 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 <script src="https://js.stripe.com/v3/"></script>
 
-    <section>
-        <div class="product">
-            <h2>Your Total is:</h2>
-            <h5>@String.Format("{0:c}", ViewBag.total)</h5>
-            <div class="discripton">
+<section>
+    <div class="product">
+        <h2>Your Total is:</h2>
+        <h5>@String.Format("{0:c}", ViewBag.Total)</h5>
+        <div class="discripton">
 
-            </div>
         </div>
-    <button id="checkout-button"class="btn btn-primary">Payment >></button>
-    </section>
+    </div>
+    <button id="checkout-button" class="btn btn-primary">Payment >></button>
+</section>
 
 
 
 
-    <script type="text/javascript">
-       
+<script type="text/javascript">
+
         // Create an instance of the Stripe object with your publishable API key
         var stripe = Stripe("@ViewBag.PublishableKey");
         var checkoutButton = document.getElementById('checkout-button');
@@ -46,6 +46,6 @@
                     console.error("Error:", error);
                 });
         });
-    </script>
+</script>
 
 
