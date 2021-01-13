@@ -57,9 +57,8 @@ namespace HomeAccessoriesStore.Data
             builder.Entity<OrderDetail>()
              .HasOne(o => o.Orders)
              .WithMany(o => o.OrderDetails)
-             .HasForeignKey(o => o.OrdersId)
-             .HasConstraintName("FK_OrderDetail_OrdersId");
-
+             .HasForeignKey(o => o.OrdersId);
+             
             //OrderDetails and Products
             builder.Entity<OrderDetail>()
                 .HasOne(p => p.Products)

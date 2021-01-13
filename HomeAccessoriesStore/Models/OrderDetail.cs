@@ -25,6 +25,7 @@ namespace HomeAccessoriesStore.Models
         public double Discount { get; set; }
         public string Payment { get; set; }
         public Orders Orders { get; set; }
+        public int test { get; set; }
         public Products Products { get; set; }
         public List<PaymentType> PaymentTypes { get; set; }
 

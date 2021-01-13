@@ -186,7 +186,7 @@ namespace HomeAccessoriesStore.Data.Migrations
                 {
                     table.PrimaryKey("PK_OrderDetail", x => x.OrderDetailsId);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_OrderID",
+                        name: "FK_OrderDetail_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Order",
                         principalColumn: "OrdersId",
